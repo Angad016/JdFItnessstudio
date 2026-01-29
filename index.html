@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JD Fitness Studio – Nagpur</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --jd-yellow: #f5c400;
+      --jd-gold: #ffcc33;
+      --jd-dark: #000000;
+      --jd-gray: #111827;
+    }
+
+    body {
+      background: linear-gradient(180deg, #000000 0%, #0b0b0b 100%);
+    }
+
+    .jd-accent { color: var(--jd-yellow); }
+    .jd-bg-accent { background-color: var(--jd-yellow); }
+    .jd-border-accent { border-color: var(--jd-yellow); }
+
+    header {
+      background: rgba(0,0,0,0.95) !important;
+      border-bottom: 1px solid rgba(245,196,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    section h2, section h3, section h4 {
+      color: var(--jd-gold);
+    }
+
+    footer {
+      border-top: 1px solid rgba(245,196,0,0.3);
+    }
+
+    .glow {
+      box-shadow: 0 0 25px rgba(245,196,0,0.35);
+    }
+
+    .rounded-full {
+      height: 150px;
+      width: 150px;
+      object-fit: cover;
+    }
+
+    .hoverjd-accent {
+      color: white;
+      font-size: 16px;
+      padding: 0px 20px;
+      margin: 0px 10px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .hoverjd-accent:hover {
+      color: var(--jd-yellow) !important;
+      text-shadow: 0 0 10px var(--jd-yellow);
+    }
+
+    .hoverjd-accent.active {
+      color: var(--jd-yellow);
+      text-shadow: 0 0 10px var(--jd-yellow);
+    }
+
+    /* Marquee Animation */
+    .marquee-container {
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      animation: marquee 30s linear infinite;
+      will-change: transform;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Fade in animations */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    .fade-in-up.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Button hover */
+    .btn-hover {
+      transition: all 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .btn-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(245,196,0,0.4);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Section spacing */
+    section {
+      scroll-margin-top: 100px;
+    }
+  </style>
+</head>
+<body class="bg-gray-950 text-white">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-8 py-4 bg-black shadow-lg fixed w-full z-50 transition-all duration-300">
+    <div class="flex items-center gap-4">
+      <img src="jd logo.jpg" alt="JD Fitness Logo" class="rounded-full glow" />
+      <h1 class="text-2xl font-bold tracking-wide jd-accent">JD Fitness Studio</h1>
+    </div>
+    <nav class="hidden md:flex gap-6 text-lg" id="navbar">
+      <a href="#home" class="hoverjd-accent">Home</a>
+      <a href="#about" class="hoverjd-accent">About</a>
+      <a href="#services" class="hoverjd-accent">Services</a>
+      <a href="#gallery" class="hoverjd-accent">Gallery</a>
+      <a href="#contact" class="hoverjd-accent">Contact</a>
+    </nav>
+    <button class="md:hidden text-2xl jd-accent" id="mobile-toggle">☰</button>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="fixed inset-0 bg-black/80 z-40 md:hidden mobile-menu" id="mobile-menu">
+    <div class="flex flex-col items-center justify-center h-full space-y-8">
+      <button class="text-4xl jd-accent" id="mobile-close">✕</button>
+      <nav class="flex flex-col gap-8 text-2xl">
+        <a href="#home" class="hoverjd-accent py-2">Home</a>
+        <a href="#about" class="hoverjd-accent py-2">About</a>
+        <a href="#services" class="hoverjd-accent py-2">Services</a>
+        <a href="#gallery" class="hoverjd-accent py-2">Gallery</a>
+        <a href="#contact" class="hoverjd-accent py-2">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="h-screen flex flex-col justify-center items-center text-center bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438')] bg-cover bg-center pt-20">
+    <div class="bg-black/80 p-12 rounded-3xl backdrop-blur-md fade-in-up">
+      <h2 class="text-6xl md:text-7xl font-extrabold mb-6 jd-gold drop-shadow-2xl">Transform Your Body</h2>
+      <p class="text-2xl mb-8 px-4 opacity-90">Train Hard. Stay Fit. Be Strong.</p>
+      <button class="jd-bg-accent px-12 py-4 rounded-2xl text-xl font-bold btn-hover glow text-black shadow-2xl"
+              onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">
+        Join Now
+      </button>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-28 px-8 bg-black fade-in-up">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-5xl font-bold mb-8">About JD Fitness Studio</h2>
+      <p class="text-xl leading-relaxed mb-10">
+        Located in the heart of Nagpur, JD Fitness Studio is your premier destination for professional fitness training.
+        Our state‑of‑the‑art facility combines cutting‑edge equipment with expert guidance to help you achieve your fitness goals.
+      </p>
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <div class="bg-gray-900 p-6 rounded-2xl glow">
+          <div class="text-3xl mb-2">🏋️</div>
+          <h4 class="text-xl font-bold mb-2">1000+</h4>
+          <p>Happy Clients</p>
+        </div>
+        <div class="bg-gray-900 p-6 rounded-2xl glow">
+          <div class="text-3xl mb-2">🥇</div>
+          <h4 class="text-xl font-bold mb-2">2+</h4>
+          <p>Certified Trainers</p>
+        </div>
+        <div class="bg-gray-900 p-6 rounded-2xl glow">
+          <div class="text-3xl mb-2">📅</div>
+          <h4 class="text-xl font-bold mb-2">6/week</h4>
+          <p>Access</p>
+        </div>
+      </div>
+      <div class="text-left md:text-center">
+        <p class="text-lg mb-4">
+          Whether you are a beginner or an experienced athlete, our trainers design personalized programs that focus on strength, endurance, and overall health.
+        </p>
+        <p class="text-lg">
+          JD Fitness Studio also offers flexible membership plans, group classes, and nutrition guidance to support your journey from day one.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-28 px-8 bg-black fade-in-up">
+    <div class="max-w-6xl mx-auto text-center mb-16">
+      <h2 class="text-5xl font-bold mb-6">Our Services</h2>
+      <p class="text-xl">
+        We offer a wide range of fitness programs tailored to your goals, schedule, and experience level.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="bg-gray-900 p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
+        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🏋️‍♂️</div>
+        <h4 class="text-3xl font-bold mb-6">Personal Training</h4>
+        <p class="text-lg mb-6">
+          One‑on‑one sessions with certified trainers who create customized workout and nutrition plans based on your body type, goals, and lifestyle.
+        </p>
+      </div>
+      <div class="bg-gray-900 p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
+        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">⚡</div>
+        <h4 class="text-3xl font-bold mb-6">Weight Loss</h4>
+        <p class="text-lg mb-6">
+          Structured fat‑burning programs, HIIT sessions, and diet counseling to help you lose weight safely and keep it off long‑term.
+        </p>
+      </div>
+      <div class="bg-gray-900 p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
+        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">💪</div>
+        <h4 class="text-3xl font-bold mb-6">Strength Training</h4>
+        <p class="text-lg mb-6">
+          Build muscle, improve posture, and increase strength with professional equipment and progressive training programs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Running Images Gallery -->
+  <section id="gallery" class="py-28 overflow-hidden bg-gray-900 fade-in-up">
+    <h3 class="text-5xl font-bold text-center mb-16">Gym Highlights</h3>
+    <div class="marquee-container max-w-7xl mx-auto">
+      <div class="marquee-track">
+        <!-- Original images -->
+        <img src="jd 1 (1).jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 2.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 3.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 4.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <!-- Duplicates for seamless loop -->
+        <img src="jd 1 (1).jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 2.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 3.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 4.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-28 text-center bg-black fade-in-up">
+    <div class="max-w-3xl mx-auto">
+      <h3 class="text-5xl font-bold mb-8">Get In Touch</h3>
+      <p class="text-xl mb-8">
+        Ready to start your transformation? Visit us today or contact us for membership and class details.
+      </p>
+      <div class="space-y-4 text-2xl">
+        <a href="https://maps.app.goo.gl/K3mine2HpbGiC46L6"
+           target="_blank"
+           class="text-lg jd-accent hover:underline">
+         📍 JD Fitness Studio, Nagpur, Maharashtra
+        </a>
+        <p>📞 +91 89754 74321</p>
+      </div>
+      <button class="jd-bg-accent px-12 py-4 rounded-2xl text-xl font-bold btn-hover glow text-black shadow-2xl mt-8"
+              onclick="window.open('https://wa.me/918975474321?text=Hi JD Fitness, I want to join the gym.', '_blank')">
+        Visit Today
+      </button>
+
+      <!-- Instagram link -->
+      <div class="mt-8">
+        <a href="https://www.instagram.com/jdfitnesstudio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+           target="_blank"
+           class="text-lg jd-accent hover:underline">
+          Our Insta Handle
+        </a>
+      </div>
+    </div>
+  </section>         📍 JD Fitness Studio, Nagpur, Maharashtra
+
+  <!-- Footer -->
+  <footer class="bg-black py-8 text-center text-gray-400 border-t border-jd-border-accent">
+    <p>&copy; 2026 JD Fitness Studio. All Rights Reserved. | Nagpur, Maharashtra</p>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileClose = document.getElementById('mobile-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+    });
+
+    mobileClose.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+    });
+
+    // Navbar active state on scroll
+    const navLinks = document.querySelectorAll('#navbar a, #mobile-menu a');
+    const sections = document.querySelectorAll('section');
+
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+
+    // Fade in animations on scroll
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-up').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Close mobile menu when clicking links
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
+ 
