@@ -15,6 +15,9 @@
 
     body {
       background: linear-gradient(180deg, #000000 0%, #0b0b0b 100%);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
 
     .jd-accent { color: var(--jd-yellow); }
@@ -67,7 +70,7 @@
     /* Marquee Animation */
     .marquee-container {
       overflow: hidden;
-      padding: 1.5rem 0;
+      padding: 2rem 0;
     }
 
     .marquee-track {
@@ -108,14 +111,9 @@
       box-shadow: 0 10px 25px rgba(245,196,0,0.4);
     }
 
-    /* Mobile menu */
+    /* Mobile menu (not used now) */
     .mobile-menu {
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-    }
-
-    .mobile-menu.open {
-      transform: translateX(0);
+      display: none;
     }
 
     /* Smooth scroll behavior */
@@ -127,31 +125,86 @@
     section {
       scroll-margin-top: 100px;
     }
+
+    /* Mobile: logo on top, nav links below */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .logo-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .logo-row img {
+        height: 70px;
+        width: 70px;
+      }
+
+      .logo-row h1 {
+        font-size: 1.25rem;
+        margin: 0;
+      }
+
+      nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        padding: 0;
+        margin: 0;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+        padding: 0.25rem 0.5rem;
+      }
+    }
   </style>
 </head>
 <body class="bg-gray-950 text-white">
 
   <!-- Header -->
-  <header class="flex items-center justify-between px-6 py-3 bg-black shadow-lg fixed w-full z-50 transition-all duration-300">
-    <div class="flex items-center gap-3">
+  <header class="flex items-center justify-between px-8 py-4 bg-black shadow-lg fixed w-full z-50 transition-all duration-300">
+    <div class="logo-row">
       <img src="jd logo.jpg" alt="JD Fitness Logo" class="rounded-full glow" />
-      <h1 class="text-xl md:text-2xl font-bold tracking-wide jd-accent">JD Fitness Studio</h1>
+      <h1 class="text-2xl font-bold tracking-wide jd-accent">JD Fitness Studio</h1>
     </div>
-    <nav class="hidden md:flex gap-4 text-base md:text-lg" id="navbar">
+    <nav class="hidden md:flex gap-6 text-lg" id="navbar">
       <a href="#home" class="hoverjd-accent">Home</a>
       <a href="#about" class="hoverjd-accent">About</a>
       <a href="#services" class="hoverjd-accent">Services</a>
       <a href="#gallery" class="hoverjd-accent">Gallery</a>
       <a href="#contact" class="hoverjd-accent">Contact</a>
     </nav>
-    <button class="md:hidden text-xl jd-accent" id="mobile-toggle">☰</button>
   </header>
 
-  <!-- Mobile Menu Overlay -->
+  <!-- Mobile header nav (same as laptop but stacked) -->
+  <header class="md:hidden flex flex-col items-center justify-between bg-black shadow-lg fixed w-full z-50 pt-12 pb-2 px-4">
+    <div class="logo-row mb-2">
+      <img src="jd logo.jpg" alt="JD Fitness Logo" class="rounded-full glow" />
+      <h1 class="text-xl font-bold tracking-wide jd-accent">JD Fitness Studio</h1>
+    </div>
+    <nav class="w-full flex justify-center gap-3 text-sm" id="navbar">
+      <a href="#home" class="hoverjd-accent">Home</a>
+      <a href="#about" class="hoverjd-accent">About</a>
+      <a href="#services" class="hoverjd-accent">Services</a>
+      <a href="#gallery" class="hoverjd-accent">Gallery</a>
+      <a href="#contact" class="hoverjd-accent">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu Overlay (not used now, but kept for future) -->
   <div class="fixed inset-0 bg-black/80 z-40 md:hidden mobile-menu" id="mobile-menu">
-    <div class="flex flex-col items-center justify-center h-full space-y-6">
-      <button class="text-3xl jd-accent" id="mobile-close">✕</button>
-      <nav class="flex flex-col gap-6 text-xl">
+    <div class="flex flex-col items-center justify-center h-full space-y-8">
+      <button class="text-4xl jd-accent" id="mobile-close">✕</button>
+      <nav class="flex flex-col gap-8 text-2xl">
         <a href="#home" class="hoverjd-accent py-2">Home</a>
         <a href="#about" class="hoverjd-accent py-2">About</a>
         <a href="#services" class="hoverjd-accent py-2">Services</a>
@@ -162,11 +215,11 @@
   </div>
 
   <!-- Hero Section -->
-  <section id="home" class="h-screen flex flex-col justify-center items-center text-center bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438')] bg-cover bg-center pt-12 md:pt-20">
-    <div class="bg-black/80 p-8 md:p-12 rounded-3xl backdrop-blur-md fade-in-up max-w-3xl mx-4">
-      <h2 class="text-4xl md:text-6xl font-extrabold mb-4 jd-gold drop-shadow-2xl">Transform Your Body</h2>
-      <p class="text-lg md:text-xl mb-6 opacity-90">Train Hard. Stay Fit. Be Strong.</p>
-      <button class="jd-bg-accent px-8 py-3 rounded-xl text-lg font-bold btn-hover glow text-black shadow-2xl"
+  <section id="home" class="h-screen flex flex-col justify-center items-center text-center bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438')] bg-cover bg-center pt-20 md:pt-24">
+    <div class="bg-black/80 p-12 rounded-3xl backdrop-blur-md fade-in-up">
+      <h2 class="text-6xl md:text-7xl font-extrabold mb-6 jd-gold drop-shadow-2xl">Transform Your Body</h2>
+      <p class="text-2xl mb-8 px-4 opacity-90">Train Hard. Stay Fit. Be Strong.</p>
+      <button class="jd-bg-accent px-12 py-4 rounded-2xl text-xl font-bold btn-hover glow text-black shadow-2xl"
               onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">
         Join Now
       </button>
@@ -174,35 +227,35 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-16 md:py-24 px-6 bg-black fade-in-up">
-    <div class="max-w-4xl md:max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6">About JD Fitness Studio</h2>
-      <p class="text-base md:text-xl leading-relaxed mb-8">
+  <section id="about" class="py-28 px-8 bg-black fade-in-up">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-5xl font-bold mb-8">About JD Fitness Studio</h2>
+      <p class="text-xl leading-relaxed mb-10">
         Located in the heart of Nagpur, JD Fitness Studio is your premier destination for professional fitness training.
         Our state‑of‑the‑art facility combines cutting‑edge equipment with expert guidance to help you achieve your fitness goals.
       </p>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mb-10">
-        <div class="bg-gray-900 p-4 md:p-6 rounded-2xl glow">
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <div class="bg-gray-900 p-6 rounded-2xl glow">
           <div class="text-3xl mb-2">🏋️</div>
-          <h4 class="text-lg md:text-xl font-bold mb-2">1000+</h4>
+          <h4 class="text-xl font-bold mb-2">1000+</h4>
           <p>Happy Clients</p>
         </div>
-        <div class="bg-gray-900 p-4 md:p-6 rounded-2xl glow">
+        <div class="bg-gray-900 p-6 rounded-2xl glow">
           <div class="text-3xl mb-2">🥇</div>
-          <h4 class="text-lg md:text-xl font-bold mb-2">2+</h4>
+          <h4 class="text-xl font-bold mb-2">2+</h4>
           <p>Certified Trainers</p>
         </div>
-        <div class="bg-gray-900 p-4 md:p-6 rounded-2xl glow">
+        <div class="bg-gray-900 p-6 rounded-2xl glow">
           <div class="text-3xl mb-2">📅</div>
-          <h4 class="text-lg md:text-xl font-bold mb-2">6/week</h4>
+          <h4 class="text-xl font-bold mb-2">6/week</h4>
           <p>Access</p>
         </div>
       </div>
       <div class="text-left md:text-center">
-        <p class="text-base md:text-lg mb-4">
+        <p class="text-lg mb-4">
           Whether you are a beginner or an experienced athlete, our trainers design personalized programs that focus on strength, endurance, and overall health.
         </p>
-        <p class="text-base md:text-lg">
+        <p class="text-lg">
           JD Fitness Studio also offers flexible membership plans, group classes, and nutrition guidance to support your journey from day one.
         </p>
       </div>
@@ -210,32 +263,32 @@
   </section>
 
   <!-- Services -->
-  <section id="services" class="py-16 md:py-24 px-6 bg-black fade-in-up">
-    <div class="max-w-4xl md:max-w-6xl mx-auto text-center mb-10">
-      <h2 class="text-3xl md:text-5xl font-bold mb-4">Our Services</h2>
-      <p class="text-base md:text-xl">
+  <section id="services" class="py-28 px-8 bg-black fade-in-up">
+    <div class="max-w-6xl mx-auto text-center mb-16">
+      <h2 class="text-5xl font-bold mb-6">Our Services</h2>
+      <p class="text-xl">
         We offer a wide range of fitness programs tailored to your goals, schedule, and experience level.
       </p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
-      <div class="bg-gray-900 p-6 md:p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
-        <div class="text-3xl md:text-4xl mb-4 group-hover:scale-110 transition-transform">🏋️‍♂️</div>
-        <h4 class="text-2xl md:text-3xl font-bold mb-4">Personal Training</h4>
-        <p class="text-sm md:text-lg mb-4">
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="bg-gray-900 p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
+        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🏋️‍♂️</div>
+        <h4 class="text-3xl font-bold mb-6">Personal Training</h4>
+        <p class="text-lg mb-6">
           One‑on‑one sessions with certified trainers who create customized workout and nutrition plans based on your body type, goals, and lifestyle.
         </p>
       </div>
-      <div class="bg-gray-900 p-6 md:p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
-        <div class="text-3xl md:text-4xl mb-4 group-hover:scale-110 transition-transform">⚡</div>
-        <h4 class="text-2xl md:text-3xl font-bold mb-4">Weight Loss</h4>
-        <p class="text-sm md:text-lg mb-4">
+      <div class="bg-gray-900 p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
+        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">⚡</div>
+        <h4 class="text-3xl font-bold mb-6">Weight Loss</h4>
+        <p class="text-lg mb-6">
           Structured fat‑burning programs, HIIT sessions, and diet counseling to help you lose weight safely and keep it off long‑term.
         </p>
       </div>
-      <div class="bg-gray-900 p-6 md:p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
-        <div class="text-3xl md:text-4xl mb-4 group-hover:scale-110 transition-transform">💪</div>
-        <h4 class="text-2xl md:text-3xl font-bold mb-4">Strength Training</h4>
-        <p class="text-sm md:text-lg mb-4">
+      <div class="bg-gray-900 p-10 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 group">
+        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">💪</div>
+        <h4 class="text-3xl font-bold mb-6">Strength Training</h4>
+        <p class="text-lg mb-6">
           Build muscle, improve posture, and increase strength with professional equipment and progressive training programs.
         </p>
       </div>
@@ -243,45 +296,45 @@
   </section>
 
   <!-- Running Images Gallery -->
-  <section id="gallery" class="py-16 md:py-24 overflow-hidden bg-gray-900 fade-in-up">
-    <h3 class="text-3xl md:text-5xl font-bold text-center mb-8 md:mb-16">Gym Highlights</h3>
-    <div class="marquee-container max-w-7xl mx-auto px-4">
+  <section id="gallery" class="py-28 overflow-hidden bg-gray-900 fade-in-up">
+    <h3 class="text-5xl font-bold text-center mb-16">Gym Highlights</h3>
+    <div class="marquee-container max-w-7xl mx-auto">
       <div class="marquee-track">
         <!-- Original images -->
-        <img src="jd 1 (1).jpeg" class="h-56 md:h-96 w-full md:w-[42rem] object-cover rounded-3xl mx-2 md:mx-4 flex-shrink-0 shadow-2xl" />
-        <img src="jd 2.jpeg" class="h-56 md:h-96 w-full md:w-[42rem] object-cover rounded-3xl mx-2 md:mx-4 flex-shrink-0 shadow-2xl" />
-        <img src="jd 3.jpeg" class="h-56 md:h-96 w-full md:w-[42rem] object-cover rounded-3xl mx-2 md:mx-4 flex-shrink-0 shadow-2xl" />
-        <img src="jd 4.jpeg" class="h-56 md:h-96 w-full md:w-[42rem] object-cover rounded-3xl mx-2 md:mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 1(1).jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 2.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 3.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 4.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
         <!-- Duplicates for seamless loop -->
-        <img src="jd 1 (1).jpeg" class="h-56 md:h-96 w-full md:w-[42rem] object-cover rounded-3xl mx-2 md:mx-4 flex-shrink-0 shadow-2xl" />
-        <img src="jd 2.jpeg" class="h-56 md:h-96 w-full md:w-[42rem] object-cover rounded-3xl mx-2 md:mx-4 flex-shrink-0 shadow-2xl" />
-        <img src="jd 3.jpeg" class="h-56 md:h-96 w-full md:w-[42rem] object-cover rounded-3xl mx-2 md:mx-4 flex-shrink-0 shadow-2xl" />
-        <img src="jd 4.jpeg" class="h-56 md:h-96 w-full md:w-[42rem] object-cover rounded-3xl mx-2 md:mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 1(1).jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 2.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 3.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
+        <img src="jd 4.jpeg" class="h-96 w-[42rem] object-cover rounded-3xl mx-4 flex-shrink-0 shadow-2xl" />
       </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-16 md:py-24 text-center bg-black fade-in-up">
-    <div class="max-w-xs md:max-w-3xl mx-auto px-4">
-      <h3 class="text-3xl md:text-5xl font-bold mb-4 md:mb-8">Get In Touch</h3>
-      <p class="text-sm md:text-xl mb-6">
+  <section id="contact" class="py-28 text-center bg-black fade-in-up">
+    <div class="max-w-3xl mx-auto">
+      <h3 class="text-5xl font-bold mb-8">Get In Touch</h3>
+      <p class="text-xl mb-8">
         Ready to start your transformation? Visit us today or contact us for membership and class details.
       </p>
-      <div class="space-y-3 text-base md:text-2xl">
+      <div class="space-y-4 text-2xl">
         <p>📍 JD Fitness Studio, Nagpur, Maharashtra</p>
         <p>📞 +91 89754 74321</p>
       </div>
-      <button class="jd-bg-accent px-8 py-3 rounded-xl text-lg font-bold btn-hover glow text-black shadow-2xl mt-6 md:mt-8"
+      <button class="jd-bg-accent px-12 py-4 rounded-2xl text-xl font-bold btn-hover glow text-black shadow-2xl mt-8"
               onclick="window.open('https://wa.me/918975474321?text=Hi JD Fitness, I want to join the gym.', '_blank')">
         Visit Today
       </button>
 
       <!-- Instagram link -->
-      <div class="mt-6">
+      <div class="mt-8">
         <a href="https://www.instagram.com/jdfitnesstudio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
            target="_blank"
-           class="text-sm md:text-lg jd-accent hover:underline">
+           class="text-lg jd-accent hover:underline">
           Our Insta Handle
         </a>
       </div>
@@ -289,26 +342,13 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-black py-6 text-center text-gray-400 border-t border-jd-border-accent text-xs md:text-sm">
+  <footer class="bg-black py-8 text-center text-gray-400 border-t border-jd-border-accent">
     <p>&copy; 2026 JD Fitness Studio. All Rights Reserved. | Nagpur, Maharashtra</p>
   </footer>
 
   <script>
-    // Mobile menu toggle
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const mobileClose = document.getElementById('mobile-close');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    mobileToggle.addEventListener('click', () => {
-      mobileMenu.classList.add('open');
-    });
-
-    mobileClose.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-    });
-
     // Navbar active state on scroll
-    const navLinks = document.querySelectorAll('#navbar a, #mobile-menu a');
+    const navLinks = document.querySelectorAll('#navbar a');
     const sections = document.querySelectorAll('section');
 
     function updateActiveNav() {
@@ -347,13 +387,6 @@
 
     document.querySelectorAll('.fade-in-up').forEach(el => {
       observer.observe(el);
-    });
-
-    // Close mobile menu when clicking links
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-      });
     });
   </script>
 </body>
