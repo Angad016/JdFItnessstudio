@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>JD Fitness Studio – Nagpur</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -111,9 +111,14 @@
       box-shadow: 0 10px 25px rgba(245,196,0,0.4);
     }
 
-    /* Mobile menu (not used now) */
+    /* Mobile menu */
     .mobile-menu {
-      display: none;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
     }
 
     /* Smooth scroll behavior */
@@ -126,44 +131,22 @@
       scroll-margin-top: 100px;
     }
 
-    /* Mobile: logo on top, nav links below */
+    /* Make whole page scale like desktop on mobile */
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: center;
-        padding-top: 1rem;
-        padding-bottom: 0.5rem;
+      body {
+        zoom: 0.8;
       }
+    }
 
-      .logo-row {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.5rem;
+    @media (max-width: 600px) {
+      body {
+        zoom: 0.7;
       }
+    }
 
-      .logo-row img {
-        height: 70px;
-        width: 70px;
-      }
-
-      .logo-row h1 {
-        font-size: 1.25rem;
-        margin: 0;
-      }
-
-      nav {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        padding: 0;
-        margin: 0;
-      }
-
-      nav a {
-        font-size: 0.9rem;
-        padding: 0.25rem 0.5rem;
+    @media (max-width: 420px) {
+      body {
+        zoom: 0.6;
       }
     }
   </style>
@@ -172,7 +155,7 @@
 
   <!-- Header -->
   <header class="flex items-center justify-between px-8 py-4 bg-black shadow-lg fixed w-full z-50 transition-all duration-300">
-    <div class="logo-row">
+    <div class="flex items-center gap-4">
       <img src="jd logo.jpg" alt="JD Fitness Logo" class="rounded-full glow" />
       <h1 class="text-2xl font-bold tracking-wide jd-accent">JD Fitness Studio</h1>
     </div>
@@ -183,24 +166,10 @@
       <a href="#gallery" class="hoverjd-accent">Gallery</a>
       <a href="#contact" class="hoverjd-accent">Contact</a>
     </nav>
+    <button class="md:hidden text-2xl jd-accent" id="mobile-toggle">☰</button>
   </header>
 
-  <!-- Mobile header nav (same as laptop but stacked) -->
-  <header class="md:hidden flex flex-col items-center justify-between bg-black shadow-lg fixed w-full z-50 pt-12 pb-2 px-4">
-    <div class="logo-row mb-2">
-      <img src="jd logo.jpg" alt="JD Fitness Logo" class="rounded-full glow" />
-      <h1 class="text-xl font-bold tracking-wide jd-accent">JD Fitness Studio</h1>
-    </div>
-    <nav class="w-full flex justify-center gap-3 text-sm" id="navbar">
-      <a href="#home" class="hoverjd-accent">Home</a>
-      <a href="#about" class="hoverjd-accent">About</a>
-      <a href="#services" class="hoverjd-accent">Services</a>
-      <a href="#gallery" class="hoverjd-accent">Gallery</a>
-      <a href="#contact" class="hoverjd-accent">Contact</a>
-    </nav>
-  </header>
-
-  <!-- Mobile Menu Overlay (not used now, but kept for future) -->
+  <!-- Mobile Menu Overlay -->
   <div class="fixed inset-0 bg-black/80 z-40 md:hidden mobile-menu" id="mobile-menu">
     <div class="flex flex-col items-center justify-center h-full space-y-8">
       <button class="text-4xl jd-accent" id="mobile-close">✕</button>
@@ -215,7 +184,7 @@
   </div>
 
   <!-- Hero Section -->
-  <section id="home" class="h-screen flex flex-col justify-center items-center text-center bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438')] bg-cover bg-center pt-20 md:pt-24">
+  <section id="home" class="h-screen flex flex-col justify-center items-center text-center bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438')] bg-cover bg-center pt-20">
     <div class="bg-black/80 p-12 rounded-3xl backdrop-blur-md fade-in-up">
       <h2 class="text-6xl md:text-7xl font-extrabold mb-6 jd-gold drop-shadow-2xl">Transform Your Body</h2>
       <p class="text-2xl mb-8 px-4 opacity-90">Train Hard. Stay Fit. Be Strong.</p>
@@ -347,8 +316,21 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileClose = document.getElementById('mobile-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+    });
+
+    mobileClose.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+    });
+
     // Navbar active state on scroll
-    const navLinks = document.querySelectorAll('#navbar a');
+    const navLinks = document.querySelectorAll('#navbar a, #mobile-menu a');
     const sections = document.querySelectorAll('section');
 
     function updateActiveNav() {
@@ -387,6 +369,13 @@
 
     document.querySelectorAll('.fade-in-up').forEach(el => {
       observer.observe(el);
+    });
+
+    // Close mobile menu when clicking links
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
     });
   </script>
 </body>
